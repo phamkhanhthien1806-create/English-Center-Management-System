@@ -1,0 +1,1 @@
+-- create database with entity and attribute
