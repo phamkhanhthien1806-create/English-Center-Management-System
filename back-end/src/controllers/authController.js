@@ -124,3 +124,55 @@ export const getProfile = async (req, res) => {
     res.status(500).json({ message: "Đã xảy ra lỗi hệ thống", error: error.message });
   }
 };
+
+export const updateProfile = async (req, res) => {
+  const userId = req.user.id;
+  const { full_name, phone, birthday, gender, address } = req.body;
+  try {
+    // Cập nhật bảng users
+    if (full_name || phone) {
+      const updates = [];
+      const params = [];
+      if (full_name) { updates.push("full_name = ?"); params.push(full_name); }
+      if (phone) { updates.push("phone = ?"); params.push(phone); }
+      params.push(userId);
+      await pool.query(`UPDATE users SET ${updates.join(", ")} WHERE id = ?`, params);
+    }
+
+    // Cập nhật avatar nếu có upload
+    let avatarPath = null;
+    if (req.file) {
+      avatarPath = `/uploads/avatars/${req.file.filename}`;
+    }
+
+    // Cập nhật student_profiles (chỉ với học viên)
+    if (req.user.role === "học viên") {
+      const [existing] = await pool.query("SELECT id FROM student_profiles WHERE user_id = ?", [userId]);
+      if (existing.length > 0) {
+        const fields = [];
+        const vals = [];
+        if (birthday !== undefined) { fields.push("birthday = ?"); vals.push(birthday || null); }
+        if (gender !== undefined) { fields.push("gender = ?"); vals.push(gender || null); }
+        if (address !== undefined) { fields.push("address = ?"); vals.push(address || null); }
+        if (avatarPath) { fields.push("avatar = ?"); vals.push(avatarPath); }
+        if (fields.length > 0) {
+          vals.push(userId);
+          await pool.query(`UPDATE student_profiles SET ${fields.join(", ")} WHERE user_id = ?`, vals);
+        }
+      }
+    }
+
+    // Trả về profile mới
+    const [updated] = await pool.query(
+      `SELECT u.id, u.full_name, u.email, u.phone, u.role, u.status, u.created_at,
+              sp.birthday, sp.gender, sp.address, sp.avatar
+       FROM users u LEFT JOIN student_profiles sp ON u.id = sp.user_id WHERE u.id = ?`,
+      [userId]
+    );
+
+    res.status(200).json({ message: "Cập nhật thông tin thành công", user: updated[0] });
+  } catch (error) {
+    console.error("Lỗi cập nhật hồ sơ:", error);
+    res.status(500).json({ message: "Đã xảy ra lỗi hệ thống", error: error.message });
+  }
+};
