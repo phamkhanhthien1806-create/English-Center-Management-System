@@ -28,11 +28,19 @@ export const updateTeacher = async (req, res) => {
   const { id } = req.params;
   const { full_name, email, phone, specialization } = req.body;
   try {
-    const [check] = await pool.query("SELECT id FROM teachers WHERE id = ?", [id]);
-    if (check.length === 0) return res.status(404).json({ message: "Không tìm thấy giáo viên" });
+    const [teachers] = await pool.query("SELECT * FROM teachers WHERE id = ?", [id]);
+    if (teachers.length === 0) return res.status(404).json({ message: "Không tìm thấy giáo viên" });
+    const cur = teachers[0];
+
     await pool.query(
       "UPDATE teachers SET full_name=?, email=?, phone=?, specialization=? WHERE id=?",
-      [full_name, email, phone, specialization, id]
+      [
+        full_name !== undefined ? full_name : cur.full_name,
+        email !== undefined ? email : cur.email,
+        phone !== undefined ? phone : cur.phone,
+        specialization !== undefined ? specialization : cur.specialization,
+        id,
+      ]
     );
     res.status(200).json({ message: "Cập nhật giáo viên thành công" });
   } catch (error) {

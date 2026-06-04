@@ -84,16 +84,25 @@ export const updateCourse = async (req, res) => {
   const { category_id, course_name, level, tuition_fee, duration, description } = req.body;
 
   try {
-    const [courseCheck] = await pool.query("SELECT id FROM courses WHERE id = ?", [id]);
-    if (courseCheck.length === 0) {
+    const [courses] = await pool.query("SELECT * FROM courses WHERE id = ?", [id]);
+    if (courses.length === 0) {
       return res.status(404).json({ message: "Không tìm thấy khóa học để cập nhật" });
     }
+    const cur = courses[0];
 
     await pool.query(
       `UPDATE courses 
        SET category_id = ?, course_name = ?, level = ?, tuition_fee = ?, duration = ?, description = ? 
        WHERE id = ?`,
-      [category_id, course_name, level, tuition_fee, duration, description, id]
+      [
+        category_id !== undefined ? category_id : cur.category_id,
+        course_name !== undefined ? course_name : cur.course_name,
+        level !== undefined ? level : cur.level,
+        tuition_fee !== undefined ? tuition_fee : cur.tuition_fee,
+        duration !== undefined ? duration : cur.duration,
+        description !== undefined ? description : cur.description,
+        id,
+      ]
     );
 
     res.status(200).json({ message: "Cập nhật khóa học thành công" });

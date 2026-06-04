@@ -78,12 +78,21 @@ export const updateClass = async (req, res) => {
   const { id } = req.params;
   const { course_id, teacher_id, class_name, start_date, end_date, max_students } = req.body;
   try {
-    const [check] = await pool.query("SELECT id FROM classes WHERE id = ?", [id]);
-    if (check.length === 0) return res.status(404).json({ message: "Không tìm thấy lớp học" });
+    const [classes] = await pool.query("SELECT * FROM classes WHERE id = ?", [id]);
+    if (classes.length === 0) return res.status(404).json({ message: "Không tìm thấy lớp học" });
+    const cur = classes[0];
 
     await pool.query(
       "UPDATE classes SET course_id=?, teacher_id=?, class_name=?, start_date=?, end_date=?, max_students=? WHERE id=?",
-      [course_id, teacher_id, class_name, start_date, end_date, max_students, id]
+      [
+        course_id !== undefined ? course_id : cur.course_id,
+        teacher_id !== undefined ? teacher_id : cur.teacher_id,
+        class_name !== undefined ? class_name : cur.class_name,
+        start_date !== undefined ? start_date : cur.start_date,
+        end_date !== undefined ? end_date : cur.end_date,
+        max_students !== undefined ? max_students : cur.max_students,
+        id,
+      ]
     );
     res.status(200).json({ message: "Cập nhật lớp học thành công" });
   } catch (error) {
