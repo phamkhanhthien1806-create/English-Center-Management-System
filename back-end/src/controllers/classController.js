@@ -142,3 +142,13 @@ export const getMySchedules = async (req, res) => {
     res.status(500).json({ message: "Lỗi hệ thống", error: error.message });
   }
 };
+
+export const deleteSchedule = async (req, res) => {
+  const { scheduleId } = req.params;
+  try {
+    await pool.query("DELETE FROM class_schedules WHERE id = ?", [scheduleId]);
+    res.status(200).json({ message: "Xóa lịch học thành công" });
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi hệ thống", error: error.message });
+  }
+};

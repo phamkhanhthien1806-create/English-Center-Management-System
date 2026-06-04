@@ -1,5 +1,5 @@
 import express from "express";
-import { getClasses, getClassById, createClass, updateClass, deleteClass, addSchedule, getMySchedules } from "../controllers/classController.js";
+import { getClasses, getClassById, createClass, updateClass, deleteClass, addSchedule, getMySchedules, deleteSchedule } from "../controllers/classController.js";
 import { authenticateToken, authorizeRole } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -11,5 +11,6 @@ router.post("/", authenticateToken, authorizeRole(["quản trị viên"]), creat
 router.put("/:id", authenticateToken, authorizeRole(["quản trị viên"]), updateClass);
 router.delete("/:id", authenticateToken, authorizeRole(["quản trị viên"]), deleteClass);
 router.post("/:id/schedules", authenticateToken, authorizeRole(["quản trị viên"]), addSchedule);
+router.delete("/schedules/:scheduleId", authenticateToken, authorizeRole(["quản trị viên"]), deleteSchedule);
 
 export default router;

@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/admin/Dashboard";
+import AdminCoursesPage from "./pages/admin/CoursesPage";
+import AdminClassesPage from "./pages/admin/ClassesPage";
 import StudentDashboard from "./pages/student/Dashboard";
 import CoursesPage from "./pages/student/CoursesPage";
 import CourseDetailPage from "./pages/student/CourseDetailPage";
@@ -31,7 +33,8 @@ function App() {
               <MainLayout>
                 <Routes>
                   <Route path="dashboard" element={<AdminDashboard />} />
-                  {/* Các route con admin khác sẽ được thêm tại Phase 4 & 5 */}
+                  <Route path="courses" element={<AdminCoursesPage />} />
+                  <Route path="classes" element={<AdminClassesPage />} />
                   <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
                 </Routes>
               </MainLayout>
