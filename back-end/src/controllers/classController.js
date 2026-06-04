@@ -125,3 +125,20 @@ export const addSchedule = async (req, res) => {
     res.status(500).json({ message: "Lỗi hệ thống", error: error.message });
   }
 };
+
+export const getMySchedules = async (req, res) => {
+  try {
+    const [rows] = await pool.query(`
+      SELECT cs.*, cl.class_name, c.course_name
+      FROM class_schedules cs
+      JOIN classes cl ON cs.class_id = cl.id
+      JOIN courses c ON cl.course_id = c.id
+      JOIN enrollments e ON e.class_id = cl.id
+      WHERE e.student_id = ? AND e.status = 'đã duyệt'
+      ORDER BY FIELD(cs.day_of_week, 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'), cs.start_time
+    `, [req.user.id]);
+    res.status(200).json(rows);
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi hệ thống", error: error.message });
+  }
+};
