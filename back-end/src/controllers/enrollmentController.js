@@ -94,7 +94,13 @@ export const updateEnrollmentStatus = async (req, res) => {
 
     await pool.query("UPDATE enrollments SET status = ? WHERE id = ?", [status, id]);
 
-    // Gửi thông báo cho học viên
+    if (status === "từ chối") {
+      await pool.query(
+        "UPDATE payments SET payment_status = 'thất bại' WHERE enrollment_id = ?",
+        [id]
+      );
+    }
+
     const [enrollment] = await pool.query("SELECT student_id, class_id FROM enrollments WHERE id = ?", [id]);
     const [cls] = await pool.query("SELECT class_name FROM classes WHERE id = ?", [enrollment[0].class_id]);
     let title = "", message = "";
