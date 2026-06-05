@@ -1,10 +1,16 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminCoursesPage from "./pages/admin/CoursesPage";
 import AdminClassesPage from "./pages/admin/ClassesPage";
 import AdminStudentsPage from "./pages/admin/StudentsPage";
+import AdminTeachersPage from "./pages/admin/TeachersPage";
 import StudentDashboard from "./pages/student/Dashboard";
 import CoursesPage from "./pages/student/CoursesPage";
 import CourseDetailPage from "./pages/student/CourseDetailPage";
@@ -37,7 +43,11 @@ function App() {
                   <Route path="courses" element={<AdminCoursesPage />} />
                   <Route path="classes" element={<AdminClassesPage />} />
                   <Route path="students" element={<AdminStudentsPage />} />
-                  <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+                  <Route path="teachers" element={<AdminTeachersPage />} />
+                  <Route
+                    path="*"
+                    element={<Navigate to="/admin/dashboard" replace />}
+                  />
                 </Routes>
               </MainLayout>
             </ProtectedRoute>
@@ -61,7 +71,10 @@ function App() {
                   <Route path="payments" element={<MyPaymentsPage />} />
                   <Route path="profile" element={<ProfilePage />} />
                   <Route path="notifications" element={<NotificationsPage />} />
-                  <Route path="*" element={<Navigate to="/student/dashboard" replace />} />
+                  <Route
+                    path="*"
+                    element={<Navigate to="/student/dashboard" replace />}
+                  />
                 </Routes>
               </MainLayout>
             </ProtectedRoute>
