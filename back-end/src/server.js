@@ -45,8 +45,11 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/stats", statsRoutes);
 app.use("/api/lessons", lessonRoutes);
 
+import { startReminderService } from "./services/reminderService.js";
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Server đang chạy tại cổng ${port}`);
+  startReminderService();
 });
