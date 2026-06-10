@@ -1,6 +1,6 @@
 # 🎓 Tata English Center - Hệ Thống Quản Lý Trung Tâm Tiếng Anh
 
-Chào mừng bạn đến với **Tata English Center** - giải pháp web toàn diện dành cho việc quản lý học tập, lớp học, khóa học và vận hành các hoạt động tại một trung tâm Tiếng Anh hiện đại. Hệ thống được phát triển theo mô hình **Full-stack (ReactJS + ExpressJS + MySQL)**, hỗ trợ tối đa cho cả học viên và quản trị viên trong các quy trình nghiệp vụ hàng ngày.
+Chào mừng bạn đến với **Tata English Center** - giải pháp web toàn diện dành cho việc quản lý học tập, lớp học, khóa học và vận hành các hoạt động tại một trung tâm Tiếng Anh hiện đại. Hệ thống được phát triển theo mô hình **Full-stack (ReactJS + ExpressJS + MySQL/TiDB Cloud)**, hỗ trợ tối đa cho cả học viên và quản trị viên trong các quy trình nghiệp vụ hàng ngày.
 
 ---
 
@@ -12,34 +12,36 @@ Chào mừng bạn đến với **Tata English Center** - giải pháp web toàn
 
 ## 📊 Công Nghệ Sử Dụng & Huy Hiệu
 
-[![Production Web](https://img.shields.io/badge/Production%20Web-Live%20Demo-success?style=for-the-badge&logo=netlify&logoColor=white)](https://tata-english-center.netlify.app/)
+[![Frontend Live](https://img.shields.io/badge/Netlify-Frontend%20Live-success?style=for-the-badge&logo=netlify&logoColor=white)](https://tata-english-center.netlify.app/)
+[![Backend Live](https://img.shields.io/badge/Render-Backend%20Live-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://render.com/)
+[![Database Cloud](https://img.shields.io/badge/TiDB%20Cloud-Database%20Serverless-blue?style=for-the-badge&logo=pingcap&logoColor=white)](https://pingcap.com/products/tidb-cloud)
+[![PayOS VietQR](https://img.shields.io/badge/PayOS-VietQR%20Integration-orange?style=for-the-badge&logo=quicklook&logoColor=white)](https://payos.vn/)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Ant Design](https://img.shields.io/badge/Ant%20Design-0170FE?style=for-the-badge&logo=antdesign&logoColor=white)](https://ant.design/)
-[![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
-[![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
 
 Hệ thống được xây dựng trên các công nghệ hiện đại, đảm bảo tính ổn định và khả năng mở rộng tốt:
 
-| Thành phần        | Công nghệ / Thư viện       | Mô tả                                                                      |
-| :---------------- | :------------------------- | :------------------------------------------------------------------------- |
-| **Frontend**      | ReactJS (v18) + TypeScript | Thư viện xây dựng giao diện người dùng và định kiểu kiểu dữ liệu chặt chẽ. |
-|                   | Vite (v8)                  | Công cụ build frontend thế hệ mới siêu nhanh.                              |
-|                   | Ant Design (v4)            | Bộ thư viện UI component chuyên nghiệp, trực quan.                         |
-|                   | Redux Toolkit              | Quản lý state toàn cục của ứng dụng (Auth, User...).                       |
-|                   | React Router DOM (v7)      | Quản lý định tuyến và luồng chuyển trang.                                  |
-|                   | Axios                      | Thư viện gọi các API Restful từ backend.                                   |
-|                   | Day.js                     | Thư viện xử lý và định dạng thời gian.                                     |
-| **Backend**       | Node.js + ExpressJS        | Môi trường chạy và framework xây dựng Restful APIs.                        |
-|                   | MySQL2                     | Driver kết nối CSDL MySQL hiệu năng cao hỗ trợ Promise.                    |
-|                   | JWT (JSON Web Tokens)      | Cơ chế xác thực phân quyền an toàn giữa Client và Server.                  |
-|                   | bcrypt                     | Băm bảo mật mật khẩu trước khi lưu vào cơ sở dữ liệu.                      |
-|                   | Multer                     | Xử lý upload tài liệu, file và hình ảnh đại diện lên server.               |
-|                   | Nodemailer                 | Gửi thư điện tử qua giao thức SMTP.                                        |
-| **Cơ sở dữ liệu** | MySQL (8.0+)               | Hệ quản trị cơ sở dữ liệu quan hệ lưu trữ dữ liệu tập trung.               |
+| Thành phần        | Công nghệ / Thư viện       | Mô tả                                                                                                                  |
+| :---------------- | :------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**      | ReactJS (v18) + TypeScript | Thư viện xây dựng giao diện người dùng và định kiểu kiểu dữ liệu chặt chẽ.                                             |
+|                   | Vite (v8)                  | Công cụ build frontend thế hệ mới siêu nhanh.                                                                          |
+|                   | Ant Design (v4)            | Bộ thư viện UI component chuyên nghiệp, trực quan.                                                                     |
+|                   | Redux Toolkit              | Quản lý state toàn cục của ứng dụng (Auth, User...).                                                                   |
+|                   | React Router DOM (v7)      | Quản lý định tuyến và luồng chuyển trang.                                                                              |
+|                   | Axios                      | Thư viện gọi các API Restful từ backend.                                                                               |
+|                   | Day.js                     | Thư viện xử lý và định dạng thời gian.                                                                                 |
+| **Backend**       | Node.js + ExpressJS        | Môi trường chạy và framework xây dựng Restful APIs.                                                                    |
+|                   | MySQL2                     | Driver kết nối CSDL MySQL hiệu năng cao hỗ trợ Promise.                                                                |
+|                   | JWT (JSON Web Tokens)      | Cơ chế xác thực phân quyền an toàn giữa Client và Server.                                                              |
+|                   | bcrypt                     | Băm bảo mật mật khẩu trước khi lưu vào cơ sở dữ liệu.                                                                  |
+|                   | Multer                     | Xử lý upload tài liệu, file và hình ảnh đại diện lên server.                                                           |
+|                   | Nodemailer                 | Gửi thư điện tử qua giao thức SMTP.                                                                                    |
+| **Thanh toán**    | PayOS SDK                  | Thư viện tích hợp cổng thanh toán VietQR thật, tự động tạo mã QR động và xác thực webhook.                             |
+| **Cơ sở dữ liệu** | MySQL (8.0+) & TiDB Cloud  | Hệ quản trị CSDL quan hệ lưu trữ dữ liệu tập trung (local) và dịch vụ CSDL đám mây Serverless TiDB Cloud (production). |
 
 ---
 
@@ -53,11 +55,16 @@ Học viên sau khi đăng nhập có thể quản lý lộ trình học tập t
 - **Quản lý thông tin cá nhân (Profile):** Cập nhật ảnh đại diện (avatar), thông tin liên hệ và lịch sử cá nhân.
 - **Khám phá Khóa học:** Xem thông tin chi tiết về các khóa học (mục tiêu, trình độ, thời lượng, học phí).
 - **Ghi danh & Đăng ký lớp học:** Gửi yêu cầu đăng ký lớp học và theo dõi trạng thái phê duyệt (_Chờ duyệt / Đã duyệt / Từ chối_).
-- **Thanh toán học phí trực tuyến (Simulated Gateway):** Hỗ trợ nhiều hình thức thanh toán mô phỏng bao gồm:
-  - **Chuyển khoản VietQR:** Tự động tạo mã QR động theo đúng số tiền học phí và nội dung chuyển khoản sử dụng API VietQR.
-  - **Ví điện tử MoMo:** Giả lập thanh toán qua MoMo.
-  - **Cổng VNPAY:** Giả lập cổng thanh toán thẻ ATM/Visa/Mastercard.
-  - **Tiền mặt:** Hướng dẫn nộp trực tiếp tại quầy lễ tân của trung tâm.
+- **Thanh toán học phí trực tuyến liên kết cổng thanh toán (Real & Simulated Gateways):**
+  - **Chuyển khoản nhanh VietQR tự động (PayOS thật):** Học viên có thể chọn thanh toán bằng VietQR thông qua cổng PayOS thật. Hệ thống sẽ tạo hóa đơn và link thanh toán trực tuyến kèm theo mã QR động chứa đúng thông tin số tiền học phí và cú pháp chuyển khoản.
+  - **Webhook tự động nhận diện giao dịch:** Tích hợp Webhook của PayOS để lắng nghe sự kiện chuyển khoản thành công từ ngân hàng thật của học viên. Khi nhận được tín hiệu thanh toán, hệ thống tự động:
+    - Cập nhật trạng thái hóa đơn sang `đã thanh toán`.
+    - Phê duyệt tự động đăng ký lớp học (`status = 'đã duyệt'`).
+    - Gửi email xác nhận kèm hóa đơn chi tiết qua Nodemailer.
+    - Tạo thông báo in-app gửi tới học viên.
+  - **Ví điện tử MoMo (Mô phỏng):** Giao diện cổng thanh toán giả lập MoMo Sandbox để kiểm thử nhanh.
+  - **Cổng VNPAY (Mô phỏng):** Giao diện giả lập thanh toán qua thẻ ngân hàng ATM/Visa/Mastercard.
+  - **Tiền mặt:** Hướng dẫn nộp trực tiếp tại quầy lễ tân của trung tâm và quản trị viên duyệt thủ công.
 - **Lịch học & Thời khóa biểu:** Giao diện lịch biểu hàng tuần trực quan giúp theo dõi chính xác ca học, phòng học và giảng viên.
 - **Học tập trực tuyến (Lessons & Materials):**
   - Xem danh sách bài giảng theo từng buổi học.
@@ -223,16 +230,34 @@ erDiagram
    npm install
    ```
 3. Tạo file cấu hình môi trường `.env` tại thư mục gốc của backend (`back-end/.env`). Bạn có thể copy từ `.env.example` và điều chỉnh các thông số phù hợp:
+
    ```env
    PORT=5000
+
+   # Cấu hình Kết nối CSDL (MySQL cục bộ hoặc TiDB Cloud)
    DB_HOST=localhost
+   DB_PORT=3306                     # Mặc định là 3306, với TiDB Cloud thường là 4000
    DB_USER=your_mysql_username      # Thường là root
-   DB_PASSWORD=your_mysql_password  # Mật khẩu MySQL của bạn
+   DB_PASSWORD=your_mysql_password  # Mật khẩu database của bạn
    DB_NAME=english_center_management
-   JWT_SECRET=tata_english_center_secret_key
+   DB_SSL=false                     # Đặt thành true khi kết nối TiDB Cloud yêu cầu SSL
+
+   # Xác thực bảo mật
+   JWT_SECRET=your_jwt_secret_key
+
+   # Cấu hình URL hệ thống
+   FRONTEND_URL=http://localhost:5173
+   BACKEND_URL=http://localhost:5000
+
+   # Cấu hình Cổng thanh toán VietQR PayOS
+   PAYOS_CLIENT_ID=your_payos_client_id
+   PAYOS_API_KEY=your_payos_api_key
+   PAYOS_CHECKSUM_KEY=your_payos_checksum_key
    ```
+
    > [!NOTE]
    > Hãy chắc chắn điền chính xác `DB_PASSWORD` để Backend kết nối thành công với MySQL.
+
 4. Chạy Backend Server ở chế độ nhà phát triển (sử dụng nodemon tự động tải lại khi đổi code):
    ```bash
    npm run dev
@@ -251,7 +276,11 @@ erDiagram
    ```bash
    npm install
    ```
-3. Khởi chạy ứng dụng client ở chế độ phát triển:
+3. Tạo file cấu hình môi trường `.env` tại thư mục gốc của frontend (`front-end/.env`) để cấu hình URL gọi API:
+   ```env
+   VITE_API_URL=http://localhost:5000/api
+   ```
+4. Khởi chạy ứng dụng client ở chế độ phát triển:
    ```bash
    npm run dev
    ```
